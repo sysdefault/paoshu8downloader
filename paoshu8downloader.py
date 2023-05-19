@@ -1,4 +1,4 @@
-# pip install requests, pip install bs4
+# pip install requests bs4 -i https://pypi.mirrors.ustc.edu.cn/simple
 import os, random, time, requests, bs4
 
 headers = {'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36'}
@@ -34,9 +34,9 @@ def download_progress(chapter_name, Y, begin, end, book_title, download_path):
     time.sleep(random.randint(4, 6))
 
 if choice == "1":
-    print(f"将下载《{book_title}》第{begin}章至第{end}章，共{end-begin+1}章，分章保存，开始下载...")
-    for i in range(end-begin+1):
-        chapter = site + chapter_list[begin+i-1]
+    print(f"将下载《{book_title}》第{begin}章至第{end}章，共{end - begin + 1}章，分章保存，开始下载...")
+    for i in range(end - begin + 1):
+        chapter = site + chapter_list[begin + i - 1]
         text_list, chapter_name = parse_chapter(chapter, headers)
         download_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), book_title)
         os.makedirs(download_path, exist_ok=True)
@@ -44,20 +44,20 @@ if choice == "1":
         text_all = "".join(text_list[:2])
         text_all += "\n".join(text_list[2:])
         text_all += "\n"
-        with open(file_path,"w",encoding = "utf-8") as f:
+        with open(file_path, "w", encoding = "utf-8") as f:
             f.write(text_all)
         download_progress(chapter_name, Y, begin, end, book_title, download_path)
 
 elif choice == "2":
-    print(f"将下载《{book_title}》第{begin}章至第{end}章，共{end-begin+1}章，整本保存，开始下载...")
-    for i in range(end-begin+1):
-        chapter = site + chapter_list[begin+i-1]
+    print(f"将下载《{book_title}》第{begin}章至第{end}章，共{end - begin + 1}章，整本保存，开始下载...")
+    for i in range(end - begin + 1):
+        chapter = site + chapter_list[begin + i - 1]
         text_list, chapter_name = parse_chapter(chapter, headers)
         download_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), book_title + ".txt")
         text_all = "".join(text_list[:2])
         text_all += "\n".join(text_list[2:])
         text_all += "\n\n"
-        with open(download_path,"a",encoding = "utf-8") as f:
+        with open(download_path, "a", encoding = "utf-8") as f:
             f.write(text_all)
         download_progress(chapter_name, Y, begin, end, book_title, download_path)
 
