@@ -40,7 +40,7 @@ if choice == "1":
         text_list, chapter_name = parse_chapter(chapter, headers)
         download_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), book_title)
         os.makedirs(download_path, exist_ok=True)
-        file_path = os.path.join(download_path, chapter_name)
+        file_path = os.path.join(download_path, chapter_name + ".txt")
         text_all = "".join(text_list[:2])
         text_all += "\n".join(text_list[2:])
         text_all += "\n"
